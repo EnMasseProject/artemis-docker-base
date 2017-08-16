@@ -19,5 +19,12 @@
             <directory>target/dependencies/artemis/apache-artemis-${artemis.version}/bin/</directory>
             <fileMode>0755</fileMode>
         </fileSet>
+
+        <!-- Temporary replace bin/artemis script, so we can change configuration directory using environment variables -->
+        <fileSet>
+          <outputDirectory>util/</outputDirectory>
+          <directory>src/main/resources/bin/</directory>
+          <fileMode>0755</fileMode>
+        </fileSet>
     </fileSets>
 </assembly>

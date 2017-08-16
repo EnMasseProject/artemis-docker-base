@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <artemis.version>2.1.0</artemis.version>
+        <artemis.version>2.2.0</artemis.version>
         <image.tag>1</image.tag>
     </properties>
 
@@ -69,12 +69,16 @@
                                 <runCmds>
                                     <run>adduser -S -D artemis nogroup</run>
                                     <run>/maven/bin/artemis create /opt/artemis --user admin --password admin --role admins --require-login</run>
+                                    <run>cp /maven/util/artemis /opt/artemis/bin/artemis</run>
                                     <run>chown -R artemis:nogroup /opt/artemis</run>
                                     <run>chmod -R a+rw /opt/artemis</run>
                                     <run>find /opt/artemis -type d -exec chmod a+x {} +</run>
                                 </runCmds>
+                                <env>
+                                    <ARTEMIS_CONFIGURATION>/opt/artemis/etc</ARTEMIS_CONFIGURATION>
+                                </env>
                                 <entryPoint>
-                                    <shell>/opt/artemis/bin/artemis run</shell>
+                                    <shell>/opt/artemis/bin/artemis run xml:${ARTEMIS_CONFIGURATION}/bootstrap.xml</shell>
                                 </entryPoint>
                                 <ports>
                                     <port>5672</port>

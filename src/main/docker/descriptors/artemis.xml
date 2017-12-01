@@ -12,6 +12,10 @@
             <outputDirectory>/</outputDirectory>
             <directory>target/dependencies/artemis/apache-artemis-${artemis.version}</directory>
             <!--<fileMode>0644</fileMode>-->
+            <excludes>
+                <exclude>lib/slf4j-jboss-logmanager*</exclude>
+                <exclude>lib/jboss-logging-3.3.0.Final*</exclude>
+            </excludes>
         </fileSet>
 
         <fileSet>
@@ -27,4 +31,19 @@
           <fileMode>0755</fileMode>
         </fileSet>
     </fileSets>
+
+    <dependencySets>
+        <dependencySet>
+            <outputDirectory>lib</outputDirectory>
+            <unpack>false</unpack>
+            <scope>runtime</scope>
+            <useProjectArtifact>false</useProjectArtifact>
+            <useTransitiveDependencies>false</useTransitiveDependencies>
+            <fileMode>0644</fileMode>
+            <includes>
+                <include>org.jboss.slf4j:slf4j-jboss-logmanager</include>
+                <include>org.jboss.logging:jboss-logging</include>
+            </includes>
+        </dependencySet>
+    </dependencySets>
 </assembly>

@@ -15,6 +15,7 @@
             <excludes>
                 <exclude>lib/slf4j-jboss-logmanager*</exclude>
                 <exclude>lib/jboss-logging-3.3.0.Final*</exclude>
+                <exclude>web/jolokia.war</exclude>
             </excludes>
         </fileSet>
 

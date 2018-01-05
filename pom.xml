@@ -10,7 +10,7 @@
 
     <properties>
         <artemis.version>2.2.0</artemis.version>
-        <image.tag>2</image.tag>
+        <image.tag>3</image.tag>
     </properties>
 
     <dependencies>
@@ -78,7 +78,7 @@
                                 </assembly>
                                 <runCmds>
                                     <run>adduser -S -D artemis nogroup</run>
-                                    <run>/maven/bin/artemis create /opt/artemis --user admin --password admin --role admins --require-login</run>
+                                    <run>/maven/bin/artemis create /opt/artemis --user admin --password admin --role admins --require-login --no-web</run>
                                     <run>cp /maven/util/artemis /opt/artemis/bin/artemis</run>
                                     <run>chown -R artemis:nogroup /opt/artemis</run>
                                     <run>chmod -R a+rw /opt/artemis</run>

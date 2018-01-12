@@ -10,7 +10,7 @@
 
     <properties>
         <artemis.version>2.2.0</artemis.version>
-        <image.tag>3</image.tag>
+        <image.tag>4</image.tag>
     </properties>
 
     <dependencies>

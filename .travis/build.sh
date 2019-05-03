@@ -3,7 +3,7 @@
 VERSION=${1:-"latest"}
 COMMIT=$2
 DOCKER_REGISTRY=quay.io
-REPO=${DOCKER_REGISTRY}/enmasse/qdrouterd-base
+REPO=${DOCKER_REGISTRY}/enmasse/artemis-base
 
 if [ -n "$TRAVIS_TAG" ]
 then

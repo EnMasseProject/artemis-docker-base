@@ -3,13 +3,12 @@ FROM quay.io/enmasse/java-base:11-1
 RUN yum -y install which libaio python hostname iputils && yum clean all -y && mkdir -p /var/run/artemis/
 
 ARG version
-ARG maven_version
 ARG commit
 
-ENV ARTEMIS_HOME=/opt/apache-artemis HOME=/run/artemis/split-1/ PATH=$ARTEMIS_HOME/bin:$PATH VERSION=${version} COMMIT=${commit} MAVEN_VERSION=${maven_version}
+ENV ARTEMIS_HOME=/opt/apache-artemis HOME=/run/artemis/split-1/ PATH=$ARTEMIS_HOME/bin:$PATH VERSION=${version} COMMIT=${commit}
 
 ADD ./target/apache-artemis-bin.tar.gz /opt
-RUN mv /opt/apache-artemis-${maven_version} $ARTEMIS_HOME
+RUN mv /opt/apache-artemis-${version} $ARTEMIS_HOME
 ADD ./target/artemis-image.tar.gz /
 
 RUN chgrp -R 0 $ARTEMIS_HOME && \

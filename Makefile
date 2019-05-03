@@ -23,7 +23,7 @@ target/artemis-image.tar.gz:
 
 
 build_docker: build
-	docker build --build-arg maven_version=$(ARTEMIS_VERSION) -t enmasse-builder:latest .
+	docker build --build-arg version=$(ARTEMIS_VERSION) -t enmasse-builder:latest .
 
 build:  target/artemis-image.tar.gz target/apache-artemis-bin.tar.gz
 

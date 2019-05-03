@@ -1,6 +1,7 @@
 #!/bin/bash
 # Assumes that COMMIT, DOCKER_USER and DOCKER_PASS to be set
 VERSION=${1:-"latest"}
+ARTEMIS_VERSION=${1:-"RELEASE"}
 COMMIT=$2
 DOCKER_REGISTRY=quay.io
 REPO=${DOCKER_REGISTRY}/enmasse/artemis-base
@@ -10,7 +11,7 @@ then
     VERSION="$TRAVIS_TAG"
 fi
 
-make || exit 1
+make ARTEMIS_VERSION=${ARTEMIS_EVSRION} || exit 1
 docker build --build-arg version=$VERSION -t $REPO:$COMMIT . || exit 1
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then

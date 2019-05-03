@@ -1,6 +1,6 @@
 #!/bin/sh
 
-source /opt/run-java/dynamic_resources.sh
+source /opt/run-java/profiles/legacy/dynamic_resources.sh
 
 if [ "${SCRIPT_DEBUG}" = "true" ] ; then
   set -x
@@ -58,3 +58,4 @@ function runServer() {
 }
 
 runServer $1
+

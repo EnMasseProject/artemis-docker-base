@@ -6,13 +6,15 @@ COMMIT=$2
 DOCKER_REGISTRY=quay.io
 REPO=${DOCKER_REGISTRY}/enmasse/artemis-base
 
-if [ -n "$TRAVIS_TAG" ]
+echo "KWDEBUG VERSION .${VERSION}."
+if [ -n "${TRAVIS_TAG}" ]
 then
-    VERSION="$TRAVIS_TAG"
+    echo "KWDEBUG TRAVIS_TAG .${TRAVIS_TAG}."
+    VERSION="${TRAVIS_TAG}"
 fi
 
-make ARTEMIS_VERSION=${ARTEMIS_EVSRION} || exit 1
-docker build --build-arg version=$VERSION -t $REPO:$COMMIT . || exit 1
+make ARTEMIS_VERSION=${ARTEMIS_VERSION} || exit 1
+docker build --build-arg version=${VERSION} -t ${REPO}:${COMMIT} . || exit 1
 
 if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     echo "Pushing $REPO:$COMMIT"

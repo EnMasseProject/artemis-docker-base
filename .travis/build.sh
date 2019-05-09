@@ -13,6 +13,7 @@ then
     VERSION="${TRAVIS_TAG}"
 fi
 
+make clean || exit 1
 make ARTEMIS_VERSION=${ARTEMIS_VERSION} || exit 1
 docker build --build-arg version=${VERSION} -t ${REPO}:${COMMIT} . || exit 1
 

@@ -25,16 +25,16 @@ function configure() {
     local instanceDir=$1
     export CONTAINER_ID=$HOSTNAME
 
-    if [ ! -d ${instanceDir} -o "$AMQ_RESET_CONFIG" = "true" ]; then
+    if [ ! -d "${instanceDir}" -o "${AMQ_RESET_CONFIG}" = "true" ]; then
         echo "Creating instance in directory $instanceDir"
-        AMQ_ARGS=("create" "$instanceDir"
+        AMQ_ARGS=("create" "${instanceDir}"
                   "--user" "admin"
                   "--password" "admin"
                   "--role" "admin"
                   "--allow-anonymous"
-                  "--java-options" "$JAVA_OPTS")
+                  "--java-options" "${JAVA_OPTS}")
 
-        if [ "$AMQ_RESET_CONFIG" = "true" ]; then
+        if [ "${AMQ_RESET_CONFIG}" = "true" ]; then
             AMQ_ARGS+=("--force")
         fi
 

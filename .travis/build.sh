@@ -6,10 +6,8 @@ COMMIT=$2
 DOCKER_REGISTRY=quay.io
 REPO=${DOCKER_REGISTRY}/enmasse/artemis-base
 
-echo "KWDEBUG VERSION .${VERSION}."
 if [ -n "${TRAVIS_TAG}" ]
 then
-    echo "KWDEBUG TRAVIS_TAG .${TRAVIS_TAG}."
     VERSION="${TRAVIS_TAG}"
 fi
 

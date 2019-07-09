@@ -25,9 +25,20 @@ function configure() {
     local instanceDir=$1
     export CONTAINER_ID=$HOSTNAME
 
-    if [ ! -d "${instanceDir}" ]; then
+    if [ ! -d "${instanceDir}" -o "${AMQ_RESET_CONFIG}" = "true" ]; then
         echo "Creating instance in directory $instanceDir"
-        $ARTEMIS_HOME/bin/artemis create $instanceDir --user admin --password admin --role admin --allow-anonymous --java-options "$JAVA_OPTS"
+        AMQ_ARGS=("create" "${instanceDir}"
+                  "--user" "admin"
+                  "--password" "admin"
+                  "--role" "admin"
+                  "--allow-anonymous"
+                  "--java-options" "${JAVA_OPTS}")
+
+        if [ "${AMQ_RESET_CONFIG}" = "true" ]; then
+            AMQ_ARGS+=("--force")
+        fi
+
+        $ARTEMIS_HOME/bin/artemis ${AMQ_ARGS[@]}
     else
         echo "Reusing existing instance in directory $instanceDir"
     fi

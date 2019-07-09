@@ -38,7 +38,7 @@ function configure() {
             AMQ_ARGS+=("--force")
         fi
 
-        $ARTEMIS_HOME/bin/artemis ${AMQ_ARGS[@]}
+        $ARTEMIS_HOME/bin/artemis "${AMQ_ARGS[@]}"
     else
         echo "Reusing existing instance in directory $instanceDir"
     fi

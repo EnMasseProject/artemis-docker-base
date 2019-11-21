@@ -11,10 +11,12 @@ ADD ./target/apache-artemis-bin.tar.gz /opt
 RUN mv /opt/apache-artemis-${version} $ARTEMIS_HOME
 ADD ./target/artemis-image.tar.gz /
 
-RUN chgrp -R 0 $ARTEMIS_HOME && \
+RUN chgrp -R 1000 $ARTEMIS_HOME && \
     chmod -R g=u $ARTEMIS_HOME
 RUN mkdir -p $HOME && \
-    chgrp -R 0 $HOME && \
+    chgrp -R 1000 $HOME && \
     chmod -R g=u $HOME
+
+USER 1000
 
 CMD ["/opt/apache-artemis/bin/launch.sh"]

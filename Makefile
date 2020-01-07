@@ -4,15 +4,27 @@ ARTEMIS_VERSION=2.10.1
 
 all: build_docker
 
+metrics:
+	cd metrics-plugin; mvn package -Dartemis.version=$(ARTEMIS_VERSION)
+	cp -f metrics-plugin/artemis-prometheus-metrics-plugin/target/artemis-prometheus-metrics-plugin-*.jar $(ARTEMIS_HOME)/lib
+	cp -f metrics-plugin/artemis-prometheus-metrics-plugin-servlet/target/metrics.war $(ARTEMIS_HOME)/lib
+
+tcnative:
+	cd tcnative-plugin; mvn package -Dartemis.version=$(ARTEMIS_VERSION)
+	cp -f tcnative-plugin/target/tcnative-plugin.jar $(ARTEMIS_HOME)/lib
+
 target/apache-artemis-bin.tar.gz:
-	mvn package -Dartemis.version=$(ARTEMIS_VERSION)
+	cd artemis-dist; mvn package -Dartemis.version=$(ARTEMIS_VERSION)
 
 clean_modules:
-	mvn clean
+	pushd artemis-dist; mvn clean; popd
+	pushd metrics-plugin; mvn clean; popd
+	pushd tcnative-plugin; mvn clean; popd
+
 
 clean: clean_modules
 
-target/artemis-image.tar.gz:
+target/artemis-image.tar.gz: metrics tcnative
 	mkdir -p $(ARTEMIS_HOME)/bin
 	mkdir -p $(ARTEMIS_HOME)/lib
 	mkdir -p $(ARTIFACT_BASE)/opt
@@ -27,4 +39,4 @@ build_docker: build
 
 build:  target/artemis-image.tar.gz target/apache-artemis-bin.tar.gz
 
-.PHONY: build_tar clean_modules
+.PHONY: build_tar clean_modules metrics tcnative

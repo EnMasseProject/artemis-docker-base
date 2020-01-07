@@ -2,6 +2,7 @@
 # Assumes that COMMIT, DOCKER_USER and DOCKER_PASS to be set
 VERSION=${1:-"latest"}
 ARTEMIS_VERSION=${1:-"RELEASE"}
+TAG=${TAG:-${ARTEMIS_VERSION}}
 COMMIT=$2
 DOCKER_REGISTRY=quay.io
 REPO=${DOCKER_REGISTRY}/enmasse/artemis-base
@@ -20,8 +21,8 @@ if [ "$TRAVIS_PULL_REQUEST" == "false" ]; then
     docker login -u $DOCKER_USER -p $DOCKER_PASS $DOCKER_REGISTRY || exit 1
     docker push $REPO:$COMMIT || exit 1
     if [ "$TRAVIS_BRANCH" == "master" ]; then
-        echo "Pushing $REPO:$VERSION"
-        docker tag $REPO:$COMMIT $REPO:$VERSION || exit 1
-        docker push $REPO:$VERSION || exit 1
+        echo "Pushing $REPO:$TAG"
+        docker tag $REPO:$COMMIT $REPO:$TAG || exit 1
+        docker push $REPO:$TAG || exit 1
     fi
 fi

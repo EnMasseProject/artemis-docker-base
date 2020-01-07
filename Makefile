@@ -17,9 +17,9 @@ target/apache-artemis-bin.tar.gz:
 	cd artemis-dist; mvn package -Dartemis.version=$(ARTEMIS_VERSION)
 
 clean_modules:
-	pushd artemis-dist; mvn clean; popd
-	pushd metrics-plugin; mvn clean; popd
-	pushd tcnative-plugin; mvn clean; popd
+	cd artemis-dist; mvn clean
+	cd metrics-plugin; mvn clean
+	cd tcnative-plugin; mvn clean
 
 
 clean: clean_modules

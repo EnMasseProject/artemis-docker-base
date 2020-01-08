@@ -6,9 +6,10 @@ all: build_docker
 
 metrics:
 	cd metrics-plugin; mvn package -Dartemis.version=$(ARTEMIS_VERSION)
+	mkdir -p $(ARTEMIS_HOME)/web
 	mkdir -p $(ARTEMIS_HOME)/lib
 	cp -f metrics-plugin/artemis-prometheus-metrics-plugin/target/artemis-prometheus-metrics-plugin-*.jar $(ARTEMIS_HOME)/lib
-	cp -f metrics-plugin/artemis-prometheus-metrics-plugin-servlet/target/metrics.war $(ARTEMIS_HOME)/lib
+	cp -f metrics-plugin/artemis-prometheus-metrics-plugin-servlet/target/metrics.war $(ARTEMIS_HOME)/web
 
 tcnative:
 	cd tcnative-plugin; mvn package -Dartemis.version=$(ARTEMIS_VERSION)

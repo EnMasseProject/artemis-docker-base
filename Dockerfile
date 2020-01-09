@@ -1,13 +1,13 @@
 FROM quay.io/enmasse/java-base:11-1
 
-RUN yum -y install which libaio python hostname iputils && yum clean all -y && mkdir -p /var/run/artemis/
+RUN yum -y install which libaio python hostname iputils openssl apr && yum clean all -y && mkdir -p /var/run/artemis/
 
 ARG version
 ARG commit
 
 ENV ARTEMIS_HOME=/opt/apache-artemis HOME=/run/artemis/split-1/ PATH=$ARTEMIS_HOME/bin:$PATH VERSION=${version} COMMIT=${commit}
 
-ADD ./target/apache-artemis-bin.tar.gz /opt
+ADD ./artemis-dist/target/apache-artemis-bin.tar.gz /opt
 RUN mv /opt/apache-artemis-${version} $ARTEMIS_HOME
 ADD ./target/artemis-image.tar.gz /
 

@@ -1,6 +1,6 @@
 ARTIFACT_BASE=target/artemis-image
 ARTEMIS_HOME=$(ARTIFACT_BASE)/opt/apache-artemis
-ARTEMIS_VERSION=2.10.1
+ARTEMIS_VERSION=2.11.0
 
 all: build_docker
 

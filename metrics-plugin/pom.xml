@@ -25,7 +25,7 @@ under the License.
    <packaging>pom</packaging>
    <version>1.0.0.CR1</version>
    <properties>
-      <artemis.version>2.10.1</artemis.version>
+      <artemis.version>2.11.0</artemis.version>
    </properties>
 
    <modules>

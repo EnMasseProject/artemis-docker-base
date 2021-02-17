@@ -1,4 +1,4 @@
-FROM quay.io/enmasse/java-base:11-1
+FROM quay.io/enmasse/java-base:11-6
 
 RUN yum -y install which libaio python hostname iputils openssl apr && yum clean all -y && mkdir -p /var/run/artemis/
 
